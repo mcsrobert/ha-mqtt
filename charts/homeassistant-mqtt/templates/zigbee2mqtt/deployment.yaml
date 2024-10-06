@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zigbee2mqtt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zigbee2mqtt
+  template:
+    metadata:
+      labels:
+        app: zigbee2mqtt
+    spec:
+      containers:
+      - name: zigbee2mqtt
+        {{- with .Values.zigbee2mqtt.image }}
+        image: "{{ .repository }}:{{ .tag }}"
+        {{- end }}
+        env:
+        - name: TZ
+          value: {{ .Values.tz }}
+        envFrom:
+        - configMapRef:
+            name: zigbee2mqtt-config
+        - secretRef:
+            name: zigbee2mqtt-secret
+        securityContext:
+          privileged: true
+        ports:
+        - name: http-z2m-pod
+          containerPort: 8080
+        volumeMounts:
+        - name: data
+          mountPath: /app/data
+        - name: udev
+          mountPath: /run/udev
+          readOnly: true
+        - name: serial
+          mountPath: /dev/ttyACM0
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: zigbee2mqtt-data
+      - name: udev
+        hostPath:
+          path: /run/udev
+      - name: serial
+        hostPath:
+          {{- with .Values.zigbee2mqtt.serial.path }}
+          path: {{ required "Serial path for Zigbee2MQTT" . }}
+          {{- end }}

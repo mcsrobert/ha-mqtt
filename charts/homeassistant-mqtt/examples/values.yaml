@@ -1,0 +1,46 @@
+tz: ""
+
+homeassistant:
+
+  ingress:
+    enabled: true
+    className: traefik
+    annotations:
+      "foo.bar/key": value
+    host: ha.example.com
+    tls:
+      - hosts:
+          - ha.example.com
+        secretName: homeassistant-cert
+
+  mqtt:
+    username: homeassistant
+    password: ha-secr3t
+
+
+zigbee2mqtt:
+
+  ingress:
+    enabled: true
+    className: traefik
+    annotations:
+      "foo.bar/key": value
+    host: z2m.example.com
+    tls:
+      - hosts:
+          - z2m.example.com
+        secretName: zigbee2mqtt-cert
+
+  mqtt:
+    username: zigbee2mqtt
+    password: z2m-secr3t
+
+  serial:
+    path: /dev/serial/by-id/my_controller_123456
+
+
+ringMqtt:
+
+  mqtt:
+    username: ring-mqtt
+    password: ring-secr3t

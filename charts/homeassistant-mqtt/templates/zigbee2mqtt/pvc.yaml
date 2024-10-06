@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zigbee2mqtt-data
+spec:
+  {{ with .Values.zigbee2mqtt.persistence }}
+  accessModes:
+    - {{ .accessMode }}
+  resources:
+    requests:
+      storage: {{ .size }}
+  {{- end }}
