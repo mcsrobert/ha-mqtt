@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zigbee2mqtt-config
+  labels:
+    app: zigbee2mqtt
+data:
+  ZIGBEE2MQTT_CONFIG_HOMEASSISTANT: "true"
+  ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: "false"
+  ZIGBEE2MQTT_CONFIG_FRONTEND: "true"
+  ZIGBEE2MQTT_CONFIG_MQTT_SERVER: mqtt://mosquitto:1883
+  ZIGBEE2MQTT_CONFIG_SERIAL_PORT: /dev/ttyACM0

@@ -1,0 +1,79 @@
+### General ###
+tz: ""
+
+
+### Home Assistant ###
+homeassistant:
+
+  image:
+    repository: homeassistant/home-assistant
+    tag: ""  # default: .Chart.AppVersion
+
+  ingress:
+    enabled: false
+    className: ""
+    annotations: {}
+    host: ""
+    tls: []
+
+  persistence:
+    accessMode: ReadWriteOnce
+    size: 8Gi
+
+  mqtt:
+    username: ""
+    password: ""
+
+
+### Mosquitto ###
+mosquitto:
+
+  image:
+    repository: eclipse-mosquitto
+    tag: "2.0"
+
+  persistence:
+    accessMode: ReadWriteOnce
+    size: 256Mi
+
+
+### ZigBee2MQTT ###
+zigbee2mqtt:
+
+  image:
+    repository: koenkk/zigbee2mqtt
+    tag: "1.39.1"
+
+  ingress:
+    enabled: false
+    className: ""
+    annotations: {}
+    host: ""
+    tls: []
+
+  persistence:
+    accessMode: ReadWriteOnce
+    size: 1Gi
+
+  mqtt:
+    username: ""
+    password: ""
+
+  serial:
+    path: ""
+
+
+### Ring MQTT ###
+ringMqtt:
+
+  image:
+    repository: tsightler/ring-mqtt
+    tag: "5.7.1"
+
+  persistence:
+    accessMode: ReadWriteOnce
+    size: 256Mi
+
+  mqtt:
+    username: ""
+    password: ""

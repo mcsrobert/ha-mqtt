@@ -1,0 +1,62 @@
+name: Lint, Test, and Release Helm Charts
+
+on:
+  push:
+    branches:
+      - "**"
+    paths:
+      - "charts/**"
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Helm
+      uses: azure/setup-helm@v4.2.0
+
+    - name: Lint & Template Helm Charts
+      run: |
+        cd charts
+        for dir in */; do
+          echo "Linting $dir"
+          helm lint "$dir"
+
+          if [ -d "$dir/examples" ]; then
+            for values_file in $dir/examples/*.yaml; do
+              echo "Template $dir with $values_file"
+              helm template "$dir" --values "$values_file"
+            done
+          fi
+        done
+
+  release:
+    needs: lint-test
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.6.0
+        with:
+          config: cr.yaml
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
