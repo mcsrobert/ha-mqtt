@@ -30,7 +30,7 @@ mosquitto:
 
   image:
     repository: eclipse-mosquitto
-    tag: "2.0"
+    tag: "2.0.19"
 
   persistence:
     accessMode: ReadWriteOnce
@@ -42,7 +42,7 @@ zigbee2mqtt:
 
   image:
     repository: koenkk/zigbee2mqtt
-    tag: "1.39.1"
+    tag: "1.40.2"
 
   ingress:
     enabled: false
