@@ -22,7 +22,8 @@ homeassistant:
 
   mqtt:
     username: ""
-    password: ""
+    # password not needed - set in Home Assistant UI
+    mosquitto_hash:
 
 
 ### Mosquitto ###
@@ -58,6 +59,7 @@ zigbee2mqtt:
   mqtt:
     username: ""
     password: ""
+    mosquitto_hash:
 
   serial:
     path: ""
@@ -77,3 +79,4 @@ ringMqtt:
   mqtt:
     username: ""
     password: ""
+    mosquitto_hash:
