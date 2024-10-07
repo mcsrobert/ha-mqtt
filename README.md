@@ -6,7 +6,7 @@ This is a Helm repository which contains the `homeassistant-mqtt` chart.
 
 Add the repository:
 
-```
+```bash
 helm repo add homeassistant-mqtt https://mcsrobert.github.io/homeassistant-mqtt
 ```
 
