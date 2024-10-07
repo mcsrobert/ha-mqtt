@@ -3,6 +3,16 @@ entries:
   homeassistant-mqtt:
   - apiVersion: v2
     appVersion: 2024.10.1
+    created: "2024-10-07T13:42:43.398633363Z"
+    description: Deploys Home Assistant and MQTT services.
+    digest: 14f4317988a1f3a70de37f5a4cc5f18bc5414067be9756e327273e51d8215f08
+    name: homeassistant-mqtt
+    type: application
+    urls:
+    - https://github.com/mcsrobert/homeassistant-mqtt/releases/download/v0.2.0/homeassistant-mqtt-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 2024.10.1
     created: "2024-10-07T13:16:06.23630449Z"
     description: Deploys Home Assistant and MQTT services.
     digest: f38aded038afccdda10abd3976c8f47673c67e269dca7aa3653cb35a9acd2b3f
@@ -41,4 +51,4 @@ entries:
     urls:
     - https://github.com/mcsrobert/homeassistant-mqtt/releases/download/v0.1.0/homeassistant-mqtt-0.1.0.tgz
     version: 0.1.0
-generated: "2024-10-07T13:16:06.236325208Z"
+generated: "2024-10-07T13:42:43.398656115Z"
