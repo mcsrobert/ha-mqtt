@@ -12,18 +12,16 @@ Basic usage:
 helm upgrade --install homeassistant-mqtt homeassistant-mqtt/homeassistant-mqtt --values my_values.yaml
 ```
 
+## Configuration
+
 To see what can be configured, see [values.yaml](./values.yaml). Also, see the [examples/](./examples/) directory.
 
 
 ### Passwords
 
-Mosquitto expects passwords in the password file to be hashed in a certain way <sup>[1](https://mosquitto.org/man/mosquitto_passwd-1.html) [2](https://stackoverflow.com/questions/69036942/ansible-create-sha512-pbkdf2-hash/74247083#74247083) [3](https://github.com/eclipse/mosquitto/blob/master/src/password_mosq.h)</sup>, and this chart allows you to either do that yourself and supply the hashed passwords directly, or they can be hashed for you.
+Mosquitto expects passwords in the password file to be hashed in a certain way <sup>[1](https://mosquitto.org/man/mosquitto_passwd-1.html) [2](https://github.com/eclipse/mosquitto/blob/master/src/password_mosq.h)</sup>. As Helm does not provide the functionality to hash these passwords, you will have to hash these passwords yourself. This is [fairly easy to do with Python](https://stackoverflow.com/questions/69036942/ansible-create-sha512-pbkdf2-hash/74247083#74247083).
 
-As Helm does not provide the functionality to hash these passwords, we need to use a post render script for this. This script rewrites the manifest before it is applied.
-
-```bash
-helm upgrade --install homeassistant-mqtt homeassistant-mqtt/homeassistant-mqtt --post-renderer mosquitto_passwd_post_renderer.py
-```
+Just like the StackOverflow post previously linked, I am personally using Ansible to fully automate installing Helm charts.
 
 ## Awknowledgements
 
