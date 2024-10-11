@@ -1,15 +1,11 @@
-# homeassistant-mqtt
+# churo-helm
 
-This is a Helm repository which contains the `homeassistant-mqtt` chart.
+This is a Helm repository which contains charts for my homelab.
 
 ## Repository
 
 Add the repository:
 
 ```bash
-helm repo add homeassistant-mqtt https://mcsrobert.github.io/homeassistant-mqtt
+helm repo add churo-helm https://mcsrobert.github.io/churo-helm
 ```
-
-## Chart
-
-See the [README.md](./charts/homeassistant-mqtt/README.md) for the chart for more information.

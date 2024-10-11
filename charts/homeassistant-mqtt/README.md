@@ -9,7 +9,7 @@ These are all also available as Home Assistant addons. This chart was created to
 Basic usage:
 
 ```bash
-helm upgrade --install homeassistant-mqtt homeassistant-mqtt/homeassistant-mqtt --values my_values.yaml
+helm upgrade --install homeassistant-mqtt churo-helm/homeassistant-mqtt --values my_values.yaml
 ```
 
 ## Configuration
