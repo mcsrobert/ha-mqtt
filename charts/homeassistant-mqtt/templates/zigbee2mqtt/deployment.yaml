@@ -1,3 +1,5 @@
+{{- with .Values.zigbee2mqtt }}
+{{- if .enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,12 +16,12 @@ spec:
     spec:
       containers:
       - name: zigbee2mqtt
-        {{- with .Values.zigbee2mqtt.image }}
+        {{- with .image }}
         image: "{{ .repository }}:{{ .tag }}"
         {{- end }}
         env:
         - name: TZ
-          value: {{ .Values.tz }}
+          value: {{ $.Values.tz }}
         envFrom:
         - configMapRef:
             name: zigbee2mqtt-config
@@ -47,6 +49,8 @@ spec:
           path: /run/udev
       - name: serial
         hostPath:
-          {{- with .Values.zigbee2mqtt.serial.path }}
+          {{- with .serial.path }}
           path: {{ required "Serial path for Zigbee2MQTT" . }}
           {{- end }}
+{{- end }}
+{{- end }}

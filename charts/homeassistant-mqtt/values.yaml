@@ -41,6 +41,8 @@ mosquitto:
 ### ZigBee2MQTT ###
 zigbee2mqtt:
 
+  enabled: true
+
   image:
     repository: koenkk/zigbee2mqtt
     tag: "1.40.2"

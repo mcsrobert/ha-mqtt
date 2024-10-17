@@ -1,3 +1,5 @@
+{{- with .Values.zigbee2mqtt }}
+{{- if .enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -11,3 +13,5 @@ spec:
   - name: http-z2m-svc
     port: 8080
     targetPort: http-z2m-pod
+{{- end }}
+{{- end }}

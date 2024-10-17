@@ -1,0 +1,17 @@
+tz: ""
+
+homeassistant:
+  mqtt:
+    username: homeassistant
+    mosquitto_hash: $7$101$NZlsYzqgcx0X3COA$1l6Uk552Kvv0vSUyJMB1Wl4J1xiiE6R42PZ73Cpw/DDQQxCc5jWdfp72u6epaOvIf+/bKGSvrQD71/lKbdMiYw==
+
+
+zigbee2mqtt:
+  enabled: false
+
+
+ringMqtt:
+  mqtt:
+    username: ring-mqtt
+    password: ring-secr3t
+    mosquitto_hash: $7$101$hnS4aRwOkfjnonat$qce/XhBCL1PNL+pREyXDhyWYuZ7jCFMI0e8Kwl1zxyS+1tnvJAlJyVOO+5oeS+JHTdedvLnJfzrNA8DJrLoofg==

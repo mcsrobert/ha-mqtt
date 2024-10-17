@@ -1,12 +1,16 @@
+{{- with .Values.zigbee2mqtt }}
+{{- if .enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: zigbee2mqtt-data
 spec:
-  {{ with .Values.zigbee2mqtt.persistence }}
+  {{ with .persistence }}
   accessModes:
     - {{ .accessMode }}
   resources:
     requests:
       storage: {{ .size }}
   {{- end }}
+{{- end }}
+{{- end }}
