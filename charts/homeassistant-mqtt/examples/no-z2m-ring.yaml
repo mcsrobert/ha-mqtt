@@ -1,4 +1,4 @@
-tz: ""
+tz: "Europe/Amsterdam"
 
 homeassistant:
 
@@ -8,14 +8,3 @@ homeassistant:
 
   serial:
     path: /dev/serial/by-id/my_unique_device
-
-
-zigbee2mqtt:
-  enabled: false
-
-
-ringMqtt:
-  mqtt:
-    username: ring-mqtt
-    password: ring-secr3t
-    mosquitto_hash: $7$101$hnS4aRwOkfjnonat$qce/XhBCL1PNL+pREyXDhyWYuZ7jCFMI0e8Kwl1zxyS+1tnvJAlJyVOO+5oeS+JHTdedvLnJfzrNA8DJrLoofg==

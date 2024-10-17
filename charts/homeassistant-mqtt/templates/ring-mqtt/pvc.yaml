@@ -1,12 +1,16 @@
+{{- with .Values.ringMqtt }}
+{{- if .enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: ring-mqtt-data
 spec:
-  {{- with .Values.ringMqtt.persistence }}
+  {{- with .persistence }}
   accessModes:
     - {{ .accessMode }}
   resources:
     requests:
       storage: {{ .size }}
   {{- end }}
+{{- end }}
+{{- end }}

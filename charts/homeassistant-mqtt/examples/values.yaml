@@ -1,4 +1,4 @@
-tz: ""
+tz: "Europe/Amsterdam"
 
 homeassistant:
 
@@ -19,6 +19,8 @@ homeassistant:
 
 
 zigbee2mqtt:
+
+  enabled: true
 
   ingress:
     enabled: true
@@ -41,6 +43,8 @@ zigbee2mqtt:
 
 
 ringMqtt:
+
+  enabled: true
 
   mqtt:
     username: ring-mqtt

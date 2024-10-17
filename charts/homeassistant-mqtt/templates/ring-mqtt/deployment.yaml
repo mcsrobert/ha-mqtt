@@ -1,3 +1,5 @@
+{{- with .Values.ringMqtt }}
+{{- if .enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,7 +16,7 @@ spec:
     spec:
       containers:
       - name: homeassistant
-        {{- with .Values.ringMqtt.image }}
+        {{- with .image }}
         image: "{{ .repository }}:{{ .tag }}"
         {{- end }}
         # ports:
@@ -32,3 +34,5 @@ spec:
       - name: config
         secret:
           secretName: ring-mqtt-config
+{{- end }}
+{{- end }}
