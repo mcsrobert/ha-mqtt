@@ -50,7 +50,7 @@ spec:
       - name: serial
         hostPath:
           {{- with .serial.path }}
-          path: {{ required "Serial path for Zigbee2MQTT" . }}
+          path: {{ required "zigbee2mqtt.serial.path" . }}
           {{- end }}
 {{- end }}
 {{- end }}

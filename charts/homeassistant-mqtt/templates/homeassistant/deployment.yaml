@@ -1,4 +1,5 @@
 apiVersion: apps/v1
+{{- with .Values.homeassistant }}
 kind: Deployment
 metadata:
   name: homeassistant
@@ -14,7 +15,7 @@ spec:
     spec:
       containers:
       - name: homeassistant
-        {{- with .Values.homeassistant.image }}
+        {{- with .image }}
         image: "{{ .repository }}:{{ .tag | default $.Chart.AppVersion }}"
         {{- end }}
         ports:
@@ -27,6 +28,10 @@ spec:
         - name: localtime
           mountPath: /etc/localtime
           readOnly: true
+        {{-  if .serial.path }}
+        - name: serial
+          mountPath: /dev/ttyACM0
+        {{- end }}
       volumes:
       - name: config
         persistentVolumeClaim:
@@ -34,3 +39,11 @@ spec:
       - name: localtime
         hostPath:
           path: /etc/localtime
+      {{- with .serial.path }}
+      {{- if . }}
+      - name: serial
+        hostPath:
+          path: {{ required "homeassistant.serial.path" . }}
+      {{- end }}
+      {{- end }}
+{{- end }}
