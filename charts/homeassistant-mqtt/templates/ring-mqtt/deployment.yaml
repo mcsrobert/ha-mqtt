@@ -13,6 +13,8 @@ spec:
     metadata:
       labels:
         app: ring-mqtt
+      annotations:
+        checksum/secret: {{ include (print $.Template.BasePath "/ring-mqtt/secret.yaml") $ | sha256sum }}
     spec:
       containers:
       - name: homeassistant
