@@ -6,6 +6,8 @@ metadata:
   name: zigbee2mqtt
 spec:
   replicas: 1
+  nodeSelector:
+    {{ required "zigbee2mqtt.serial.nodeSelector" .serial.nodeSelector | toYaml | indent 4 }}
   selector:
     matchLabels:
       app: zigbee2mqtt

@@ -39,6 +39,8 @@ zigbee2mqtt:
     mosquitto_hash: $7$101$mQhgJLIxXVtFpOwU$QfIOPODCW2RhDCoLSxMsKqGKTcUmWUucg3dUp04DGFmjVAQ0Vg2TAAdNtfclQEaYNpbi5pfOD1xd9jYj7U8r9g==
 
   serial:
+    nodeSelector:
+      kubernetes.io/hostname: node_with_usb
     path: /dev/serial/by-id/my_controller_123456
 
 
