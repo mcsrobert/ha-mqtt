@@ -20,32 +20,32 @@ spec:
         runAsGroup: 1883
         fsGroup: 1883
       containers:
-      - name: mosquitto
-        {{- with .Values.mosquitto }}
-        image: "{{ .image.repository }}:{{ .image.tag }}"
-        ports:
-        - name: mqtt-pod
-          containerPort: 1883
-        # - name: mqtt-ws-pod
-        #   containerPort: 9001
-        volumeMounts:
-        - name: data
-          mountPath: /mosquitto/data
-        - name: config
-          mountPath: /mosquitto/config/mosquitto.conf
-          subPath: mosquitto.conf
-        - name: passwd
-          mountPath: /mosquitto/config/passwd
-          subPath: passwd
-        {{- end }}
+        - name: mosquitto
+          {{- with .Values.mosquitto }}
+          image: "{{ .image.repository }}:{{ .image.tag }}"
+          ports:
+            - name: mqtt-pod
+              containerPort: 1883
+            # - name: mqtt-ws-pod
+            #   containerPort: 9001
+          volumeMounts:
+            - name: data
+              mountPath: /mosquitto/data
+            - name: config
+              mountPath: /mosquitto/config/mosquitto.conf
+              subPath: mosquitto.conf
+            - name: passwd
+              mountPath: /mosquitto/config/passwd
+              subPath: passwd
+          {{- end }}
       volumes:
-      - name: data
-        persistentVolumeClaim:
-          claimName: mosquitto-data
-      - name: config
-        configMap:
-          name: mosquitto-config
-      - name: passwd
-        secret:
-          secretName: mosquitto-passwd
-          defaultMode: 0700
+        - name: data
+          persistentVolumeClaim:
+            claimName: mosquitto-data
+        - name: config
+          configMap:
+            name: mosquitto-config
+        - name: passwd
+          secret:
+            secretName: mosquitto-passwd
+            defaultMode: 0700

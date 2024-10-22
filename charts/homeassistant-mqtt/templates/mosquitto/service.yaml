@@ -6,7 +6,7 @@ spec:
   selector:
     app: mosquitto
   ports:
-  - name: mqtt-svc
-    port: 1883
-  # - name: mqtt-ws-svc
-  #   port: 9001
+    - name: mqtt-svc
+      port: 1883
+    # - name: mqtt-ws-svc
+    #   port: 9001

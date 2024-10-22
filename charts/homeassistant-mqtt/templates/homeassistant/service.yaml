@@ -6,6 +6,6 @@ spec:
   selector:
     app: homeassistant
   ports:
-  - name: http-ha-svc
-    port: 80
-    targetPort: http-ha-pod
+    - name: http-ha-svc
+      port: 80
+      targetPort: http-ha-pod

@@ -14,36 +14,35 @@ spec:
         app: homeassistant
     spec:
       containers:
-      - name: homeassistant
-        {{- with .image }}
-        image: "{{ .repository }}:{{ .tag | default $.Chart.AppVersion }}"
-        {{- end }}
-        ports:
-        - name: http-ha-pod
-          containerPort: 8123
-        resources: {}
-        volumeMounts:
-        - name: config
-          mountPath: /config
-        - name: localtime
-          mountPath: /etc/localtime
-          readOnly: true
-        {{-  if .serial.path }}
-        - name: serial
-          mountPath: /dev/ttyACM0
-        {{- end }}
+        - name: homeassistant
+          {{- with .image }}
+          image: "{{ .repository }}:{{ .tag | default $.Chart.AppVersion }}"
+          {{- end }}
+          ports:
+            - name: http-ha-pod
+              containerPort: 8123
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: localtime
+              mountPath: /etc/localtime
+              readOnly: true
+            {{-  if .serial.path }}
+            - name: serial
+              mountPath: /dev/ttyACM0
+            {{- end }}
       volumes:
-      - name: config
-        persistentVolumeClaim:
-          claimName: homeassistant-config
-      - name: localtime
-        hostPath:
-          path: /etc/localtime
-      {{- with .serial.path }}
-      {{- if . }}
-      - name: serial
-        hostPath:
-          path: {{ required "homeassistant.serial.path" . }}
-      {{- end }}
-      {{- end }}
+        - name: config
+          persistentVolumeClaim:
+            claimName: homeassistant-config
+        - name: localtime
+          hostPath:
+            path: /etc/localtime
+        {{- with .serial.path }}
+        {{- if . }}
+        - name: serial
+          hostPath:
+            path: {{ required "homeassistant.serial.path" . }}
+        {{- end }}
+        {{- end }}
 {{- end }}

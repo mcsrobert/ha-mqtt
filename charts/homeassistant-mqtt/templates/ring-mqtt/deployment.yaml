@@ -17,24 +17,24 @@ spec:
         checksum/secret: {{ include (print $.Template.BasePath "/ring-mqtt/secret.yaml") $ | sha256sum }}
     spec:
       containers:
-      - name: homeassistant
-        {{- with .image }}
-        image: "{{ .repository }}:{{ .tag }}"
-        {{- end }}
-        # ports:
-        # - containerPort: 8554
-        volumeMounts:
-        - name: data
-          mountPath: /data
-        - name: config
-          mountPath: /data/config.json
-          subPath: config.json
+        - name: homeassistant
+          {{- with .image }}
+          image: "{{ .repository }}:{{ .tag }}"
+          {{- end }}
+          # ports:
+          # - containerPort: 8554
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: config
+              mountPath: /data/config.json
+              subPath: config.json
       volumes:
-      - name: data
-        persistentVolumeClaim:
-          claimName: ring-mqtt-data
-      - name: config
-        secret:
-          secretName: ring-mqtt-config
+        - name: data
+          persistentVolumeClaim:
+            claimName: ring-mqtt-data
+        - name: config
+          secret:
+            secretName: ring-mqtt-config
 {{- end }}
 {{- end }}
