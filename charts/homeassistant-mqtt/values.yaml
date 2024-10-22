@@ -67,7 +67,7 @@ zigbee2mqtt:
     mosquitto_hash: ""
 
   serial:
-    nodeName: ""
+    nodeSelector: {}
     path: ""
 
 
