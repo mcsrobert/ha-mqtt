@@ -5,6 +5,8 @@ metadata:
   name: homeassistant
 spec:
   replicas: 1
+  nodeSelector:
+    {{ required "homeassistant.serial.nodeSelector" .serial.nodeSelector | toYaml | nindent 4 }}
   selector:
     matchLabels:
       app: homeassistant

@@ -26,6 +26,7 @@ homeassistant:
     mosquitto_hash: ""
 
   serial:
+    nodeSelector: {}
     path: ""
 
 
