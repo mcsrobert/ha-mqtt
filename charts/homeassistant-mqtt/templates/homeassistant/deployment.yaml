@@ -23,6 +23,10 @@ spec:
           ports:
             - name: http-ha-pod
               containerPort: 8123
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http-ha-pod
           volumeMounts:
             - name: config
               mountPath: /config
