@@ -1,0 +1,37 @@
+Thank you for installing {{ .Chart.Name }}.
+
+Your release is named {{ .Release.Name }}.
+
+We installed:
+
+{{- with .Values }}
+  {{- with .homeassistant }}
+  - Home Assistant
+    {{- with .ingress }}
+    {{- if .enabled }}
+    http{{ if .tls  }}s{{ end }}://{{ .host }}
+    {{- end }}
+    {{- end }}
+  {{- end }}
+
+  {{- with .mosquitto }}
+  - Mosquitto
+  {{- end }}
+
+  {{- with .zigbee2mqtt }}
+  {{- if .enabled }}
+  - ZigBee2MQTT
+    {{- with .ingress }}
+    {{- if .enabled }}
+    http{{ if .tls  }}s{{ end }}://{{ .host }}
+    {{- end }}
+    {{- end }}
+  {{- end }}
+  {{- end }}
+
+  {{- with .ringMqtt }}
+  {{- if .enabled }}
+  - ring-mqtt
+  {{- end }}
+  {{- end }}
+{{- end }}
