@@ -29,6 +29,7 @@ spec:
             - name: config
               mountPath: /data/config.json
               subPath: config.json
+              readOnly: true
       volumes:
         - name: data
           persistentVolumeClaim:
