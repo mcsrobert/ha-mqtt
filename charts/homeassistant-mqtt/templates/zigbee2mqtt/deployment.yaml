@@ -7,7 +7,9 @@ metadata:
 spec:
   replicas: 1
   nodeSelector:
-    {{ required "zigbee2mqtt.serial.nodeSelector" .serial.nodeSelector | toYaml | nindent 4 }}
+    {{- with .serial.nodeSelector }}
+    {{ required "zigbee2mqtt.serial.nodeSelector" . | toYaml | nindent 4 }}
+    {{- end }}
   selector:
     matchLabels:
       app: zigbee2mqtt

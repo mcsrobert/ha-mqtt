@@ -5,8 +5,12 @@ metadata:
   name: homeassistant
 spec:
   replicas: 1
+  {{- with .serial.nodeSelector }}
+  {{- if . }}
   nodeSelector:
-    {{ required "homeassistant.serial.nodeSelector" .serial.nodeSelector | toYaml | nindent 4 }}
+    {{ . | toYaml | nindent 4 }}
+  {{- end }}
+  {{- end }}
   selector:
     matchLabels:
       app: homeassistant
@@ -48,7 +52,7 @@ spec:
         {{- if . }}
         - name: serial
           hostPath:
-            path: {{ required "homeassistant.serial.path" . }}
+            path: {{ . }}
         {{- end }}
         {{- end }}
 {{- end }}
