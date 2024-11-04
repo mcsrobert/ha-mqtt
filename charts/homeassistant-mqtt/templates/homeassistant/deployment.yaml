@@ -14,7 +14,7 @@ spec:
         app: homeassistant
     spec:
       {{- if .serial.nodeSelector }}
-      nodeSelector: {{ .serial.nodeSelector | toYaml | nindent 6 }}
+      nodeSelector: {{ .serial.nodeSelector | toYaml | nindent 8 }}
       {{- end }}
       containers:
         - name: homeassistant

@@ -15,7 +15,7 @@ spec:
         app: zigbee2mqtt
     spec:
       {{- with .serial.nodeSelector }}
-      nodeSelector: {{ required "zigbee2mqtt.serial.nodeSelector" . | toYaml | nindent 6 }}
+      nodeSelector: {{ required "zigbee2mqtt.serial.nodeSelector" . | toYaml | nindent 8 }}
       {{- end }}
       containers:
         - name: zigbee2mqtt
