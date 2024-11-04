@@ -5,9 +5,6 @@ metadata:
   name: homeassistant
 spec:
   replicas: 1
-  {{- if .serial.nodeSelector }}
-  nodeSelector: {{ .serial.nodeSelector | toYaml | nindent 4 }}
-  {{- end }}
   selector:
     matchLabels:
       app: homeassistant
@@ -16,6 +13,9 @@ spec:
       labels:
         app: homeassistant
     spec:
+      {{- if .serial.nodeSelector }}
+      nodeSelector: {{ .serial.nodeSelector | toYaml | nindent 6 }}
+      {{- end }}
       containers:
         - name: homeassistant
           {{- with .image }}
