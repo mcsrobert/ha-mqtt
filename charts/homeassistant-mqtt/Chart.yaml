@@ -10,4 +10,4 @@ type: application
 version: 0.3.7
 
 # Default Home Assistant version
-appVersion: "2024.10.4"
+appVersion: "2024.11.3"
