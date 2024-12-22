@@ -13,6 +13,7 @@ spec:
       labels:
         app: homeassistant
     spec:
+      dnsPolicy: {{ .dnsPolicy }}
       hostNetwork: {{ .hostNetwork }}
       {{- if .serial.nodeSelector }}
       nodeSelector: {{ toYaml .serial.nodeSelector | nindent 8 }}

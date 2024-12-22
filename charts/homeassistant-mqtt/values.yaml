@@ -26,6 +26,7 @@ homeassistant:
     mosquitto_hash: ""
 
   hostNetwork: false
+  dnsPolicy: Default
 
   serial:
     nodeSelector: {}
