@@ -25,6 +25,8 @@ homeassistant:
     # password not needed - set in Home Assistant UI
     mosquitto_hash: ""
 
+  hostNetwork: false
+
   serial:
     nodeSelector: {}
     path: ""
