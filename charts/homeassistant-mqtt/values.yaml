@@ -17,7 +17,6 @@ homeassistant:
     tls: []
 
   persistence:
-    accessMode: ReadWriteOnce
     size: 8Gi
 
   mqtt:

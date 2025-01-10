@@ -1,10 +1,12 @@
-apiVersion: apps/v1
 {{- with .Values.homeassistant }}
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: homeassistant
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: homeassistant
@@ -13,11 +15,11 @@ spec:
       labels:
         app: homeassistant
     spec:
-      dnsPolicy: {{ .dnsPolicy }}
-      hostNetwork: {{ .hostNetwork }}
       {{- if .serial.nodeSelector }}
       nodeSelector: {{ toYaml .serial.nodeSelector | nindent 8 }}
       {{- end }}
+      hostNetwork: {{ .hostNetwork }}
+      dnsPolicy: {{ .dnsPolicy }}
       containers:
         - name: homeassistant
           {{- with .image }}
