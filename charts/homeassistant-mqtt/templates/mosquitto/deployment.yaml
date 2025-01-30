@@ -1,3 +1,4 @@
+{{- with .Values.mosquitto }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -20,7 +21,6 @@ spec:
         fsGroup: 1883
       containers:
         - name: mosquitto
-          {{- with .Values.mosquitto }}
           image: "{{ .image.repository }}:{{ .image.tag }}"
           ports:
             - name: mqtt-pod
@@ -38,7 +38,6 @@ spec:
               mountPath: /mosquitto/config/passwd
               subPath: passwd
               readOnly: true
-          {{- end }}
       volumes:
         - name: data
           persistentVolumeClaim:
@@ -50,3 +49,4 @@ spec:
           secret:
             secretName: mosquitto-passwd
             defaultMode: 0700
+{{- end }}

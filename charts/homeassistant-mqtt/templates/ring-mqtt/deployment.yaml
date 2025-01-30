@@ -17,10 +17,8 @@ spec:
         checksum/secret: {{ include (print $.Template.BasePath "/ring-mqtt/secret.yaml") $ | sha256sum }}
     spec:
       containers:
-        - name: homeassistant
-          {{- with .image }}
-          image: "{{ .repository }}:{{ .tag }}"
-          {{- end }}
+        - name: ring-mqtt
+          image: "{{ .image.repository }}:{{ .image.tag }}"
           # ports:
           # - containerPort: 8554
           volumeMounts:

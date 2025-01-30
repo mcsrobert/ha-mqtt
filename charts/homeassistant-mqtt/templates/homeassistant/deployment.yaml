@@ -15,9 +15,6 @@ spec:
       labels:
         app: homeassistant
     spec:
-      {{- if .serial.nodeSelector }}
-      nodeSelector: {{ toYaml .serial.nodeSelector | nindent 8 }}
-      {{- end }}
       hostNetwork: {{ .hostNetwork }}
       dnsPolicy: {{ .dnsPolicy }}
       containers:
@@ -28,29 +25,20 @@ spec:
           ports:
             - name: http-ha-pod
               containerPort: 8123
+          securityContext:
+            {{- toYaml .securityContext | nindent 12 }}
+          resources:
+            {{- toYaml .resources | nindent 12 }}
           livenessProbe:
-            httpGet:
-              path: /
-              port: http-ha-pod
+            {{- toYaml .livenessProbe | nindent 12 }}
           env:
             - name: TZ
               value: {{ $.Values.tz }}
           volumeMounts:
             - name: config
               mountPath: /config
-            {{-  if .serial.path }}
-            - name: serial
-              mountPath: /dev/ttyACM0
-            {{- end }}
       volumes:
         - name: config
           persistentVolumeClaim:
             claimName: homeassistant-config
-        {{- with .serial.path }}
-        {{- if . }}
-        - name: serial
-          hostPath:
-            path: {{ . }}
-        {{- end }}
-        {{- end }}
 {{- end }}

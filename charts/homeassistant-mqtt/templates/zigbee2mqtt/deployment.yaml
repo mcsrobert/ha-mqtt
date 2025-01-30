@@ -14,14 +14,11 @@ spec:
       labels:
         app: zigbee2mqtt
     spec:
-      {{- with .serial.nodeSelector }}
-      nodeSelector: {{ required "zigbee2mqtt.serial.nodeSelector" . | toYaml | nindent 8 }}
-      {{- end }}
+      nodeSelector:
+        {{ toYaml .nodeSelector | nindent 8 }}
       containers:
         - name: zigbee2mqtt
-          {{- with .image }}
-          image: "{{ .repository }}:{{ .tag }}"
-          {{- end }}
+          image: "{{ .image.repository }}:{{ .image.tag }}"
           env:
             - name: TZ
               value: {{ $.Values.tz }}
@@ -56,8 +53,6 @@ spec:
             path: /run/udev
         - name: serial
           hostPath:
-            {{- with .serial.path }}
-            path: {{ required "zigbee2mqtt.serial.path" . }}
-            {{- end }}
+            path: {{ required "zigbee2mqtt.serial.path" .serial.path }}
 {{- end }}
 {{- end }}
