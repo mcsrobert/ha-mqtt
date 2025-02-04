@@ -24,6 +24,7 @@ jobs:
     - name: Lint & Template Helm Charts
       run: |
         cd charts
+        ls -l
         for dir in */; do
           echo "Linting $dir"
           helm lint "$dir"
