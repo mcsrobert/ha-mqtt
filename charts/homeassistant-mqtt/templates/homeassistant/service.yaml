@@ -2,9 +2,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: homeassistant
+  labels:
+    {{- include "homeassistant.labels" $ | nindent 4 }}
 spec:
   selector:
-    app: homeassistant
+    {{- include "homeassistant.selectorLabels" $ | nindent 4 }}
   ports:
     - name: http-ha-svc
       port: 80

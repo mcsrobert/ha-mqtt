@@ -10,6 +10,8 @@ metadata:
   annotations:
     {{- .annotations | toYaml | nindent 4 }}
   {{- end }}
+  labels:
+    {{- include "zigbee2mqtt.labels" $ | nindent 4 }}
 spec:
   {{- if .className }}
   ingressClassName: {{ .className }}

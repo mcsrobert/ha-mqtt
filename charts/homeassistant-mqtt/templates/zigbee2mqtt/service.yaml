@@ -5,10 +5,10 @@ kind: Service
 metadata:
   name: zigbee2mqtt
   labels:
-    app: zigbee2mqtt
+    {{- include "zigbee2mqtt.labels" $ | nindent 4 }}
 spec:
   selector:
-    app: zigbee2mqtt
+      {{- include "zigbee2mqtt.selectorLabels" $ | nindent 4 }}
   ports:
     - name: http-z2m-svc
       port: 8080

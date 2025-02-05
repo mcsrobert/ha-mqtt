@@ -4,7 +4,7 @@ kind: ConfigMap
 metadata:
   name: zigbee2mqtt-config
   labels:
-    app: zigbee2mqtt
+    {{- include "zigbee2mqtt.labels" $ | nindent 4 }}
 data:
   ZIGBEE2MQTT_CONFIG_PERMIT_JOIN: "false"
   ZIGBEE2MQTT_CONFIG_FRONTEND_ENABLED: "true"

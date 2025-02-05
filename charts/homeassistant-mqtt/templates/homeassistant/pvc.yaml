@@ -3,11 +3,11 @@ kind: PersistentVolumeClaim
 metadata:
   name: homeassistant-config
   labels:
-    app: homeassistant
+    {{- include "homeassistant.labels" $ | nindent 4 }}
 spec:
   {{- with .Values.homeassistant.persistence }}
   accessModes:
-    - ReadWriteOnce
+    - {{ .accessMode }}
   resources:
     requests:
       storage: {{ .size }}

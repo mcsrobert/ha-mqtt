@@ -2,31 +2,43 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mosquitto
+  name: {{ include "mosquitto.fullname" $ }}
+  labels:
+    {{- include "mosquitto.labels" $ | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mosquitto
+      {{- include "mosquitto.selectorLabels" $ | nindent 6 }}
   template:
     metadata:
-      labels:
-        app: mosquitto
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/mosquitto/config.yaml") $ | sha256sum }}
+      labels:
+        {{- include "mosquitto.labels" $ | nindent 8 }}
+        {{- if .podLabels }}
+        {{- .podLabels | toYaml | nindent 8 }}
+        {{- end }}
     spec:
       securityContext:
-        runAsUser: 1883
-        runAsGroup: 1883
-        fsGroup: 1883
+        {{- .podSecurityContext | toYaml | nindent 8 }}
+      serviceAccountName: {{ include "mosquitto.serviceAccountName" $ }}
       containers:
         - name: mosquitto
+          securityContext:
+            {{- .securityContext | toYaml | nindent 12 }}
           image: "{{ .image.repository }}:{{ .image.tag }}"
           ports:
             - name: mqtt-pod
               containerPort: 1883
             # - name: mqtt-ws-pod
             #   containerPort: 9001
+          resources:
+            {{- .resources | toYaml | nindent 12 }}
+          livenessProbe:
+            {{- .livenessProbe | toYaml | nindent 12 }}
+          readinessProbe:
+            {{- .readinessProbe | toYaml | nindent 12 }}
           volumeMounts:
             - name: data
               mountPath: /mosquitto/data

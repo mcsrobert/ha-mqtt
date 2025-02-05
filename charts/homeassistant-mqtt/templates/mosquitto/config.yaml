@@ -2,6 +2,8 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: mosquitto-config
+  labels:
+    {{- include "mosquitto.labels" $ | nindent 4 }}
 data:
   mosquitto.conf: |
     persistence true

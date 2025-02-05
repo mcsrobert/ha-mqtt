@@ -2,35 +2,46 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: homeassistant
+  name: {{ include "homeassistant.fullname" $ }}
+  labels:
+    {{- include "homeassistant.labels" $ | nindent 4 }}
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: homeassistant
+      {{- include "homeassistant.selectorLabels" $ | nindent 6 }}
   template:
     metadata:
+      annotations:
+        {{- .podAnnotations | toYaml | nindent 8 }}
       labels:
-        app: homeassistant
+        {{- include "homeassistant.labels" $ | nindent 8 }}
+        {{- if .podLabels }}
+        {{- .podLabels | toYaml | nindent 8 }}
+        {{- end }}
     spec:
+      securityContext:
+        {{- .podSecurityContext | toYaml | nindent 8 }}
       hostNetwork: {{ .hostNetwork }}
       dnsPolicy: {{ .dnsPolicy }}
       containers:
         - name: homeassistant
+          securityContext:
+            {{- .securityContext | toYaml | nindent 12 }}
           {{- with .image }}
           image: "{{ .repository }}:{{ .tag | default $.Chart.AppVersion }}"
           {{- end }}
           ports:
             - name: http-ha-pod
               containerPort: 8123
-          securityContext:
-            {{- toYaml .securityContext | nindent 12 }}
           resources:
-            {{- toYaml .resources | nindent 12 }}
+            {{- .resources | toYaml | nindent 12 }}
           livenessProbe:
-            {{- toYaml .livenessProbe | nindent 12 }}
+            {{- .livenessProbe | toYaml | nindent 12 }}
+          readinessProbe:
+            {{- .readinessProbe | toYaml | nindent 12 }}
           env:
             - name: TZ
               value: {{ $.Values.tz }}

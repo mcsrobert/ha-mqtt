@@ -3,22 +3,43 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: zigbee2mqtt
+  name: {{ include "zigbee2mqtt.fullname" $ }}
+  labels:
+    {{- include "zigbee2mqtt.labels" $ | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: zigbee2mqtt
+      {{- include "zigbee2mqtt.selectorLabels" $ | nindent 6 }}
   template:
     metadata:
+      annotations:
+        {{- .podAnnotations | toYaml | nindent 8 }}
       labels:
-        app: zigbee2mqtt
+        {{- include "zigbee2mqtt.labels" $ | nindent 8 }}
+        {{- if .podLabels }}
+        {{- .podLabels | toYaml | nindent 8 }}
+        {{- end }}
     spec:
+      securityContext:
+        {{- .podSecurityContext | toYaml | nindent 8 }}
+      serviceAccountName: {{ include "zigbee2mqtt.serviceAccountName" $ }}
       nodeSelector:
-        {{ toYaml .nodeSelector | nindent 8 }}
+        {{ .nodeSelector | toYaml | nindent 8 }}
       containers:
         - name: zigbee2mqtt
+          securityContext:
+            {{- .securityContext | toYaml | nindent 12 }}
           image: "{{ .image.repository }}:{{ .image.tag }}"
+          ports:
+            - name: http-z2m-pod
+              containerPort: 8080
+          resources:
+            {{- .resources | toYaml | nindent 12 }}
+          livenessProbe:
+            {{- .livenessProbe | toYaml | nindent 12 }}
+          readinessProbe:
+            {{- .readinessProbe | toYaml | nindent 12 }}
           env:
             - name: TZ
               value: {{ $.Values.tz }}
@@ -27,15 +48,6 @@ spec:
                 name: zigbee2mqtt-config
             - secretRef:
                 name: zigbee2mqtt-secret
-          securityContext:
-            privileged: true
-          ports:
-            - name: http-z2m-pod
-              containerPort: 8080
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http-z2m-pod
           volumeMounts:
             - name: data
               mountPath: /app/data

@@ -3,24 +3,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ring-mqtt
+  name: {{ include "ringMqtt.fullname" $ }}
+  labels:
+    {{- include "ringMqtt.labels" $ | nindent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ring-mqtt
+      {{- include "ringMqtt.selectorLabels" $ | nindent 6 }}
   template:
     metadata:
       labels:
-        app: ring-mqtt
+        {{- include "ringMqtt.labels" $ | nindent 8 }}
+        {{- if .podLabels }}
+        {{- .podLabels | toYaml | nindent 8 }}
+        {{- end }}
       annotations:
         checksum/secret: {{ include (print $.Template.BasePath "/ring-mqtt/secret.yaml") $ | sha256sum }}
     spec:
+      securityContext:
+        {{- .podSecurityContext | toYaml | nindent 8 }}
+      serviceAccountName: {{ include "ringMqtt.serviceAccountName" $ }}
       containers:
         - name: ring-mqtt
           image: "{{ .image.repository }}:{{ .image.tag }}"
           # ports:
           # - containerPort: 8554
+          resources:
+            {{- .resources | toYaml | nindent 12 }}
+          livenessProbe:
+            {{- .livenessProbe | toYaml | nindent 12 }}
+          readinessProbe:
+            {{- .readinessProbe | toYaml | nindent 12 }}
           volumeMounts:
             - name: data
               mountPath: /data
