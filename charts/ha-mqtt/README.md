@@ -1,4 +1,4 @@
-# homeassistant-mqtt
+# ha-mqtt
 
 This Helm chart that deploys [Home Assistant](https://www.home-assistant.io/) with [Mosquitto](https://mosquitto.org/) as [MQTT](https://mqtt.org/) server and other services that use MQTT ([Zigbee2MQTT](https://www.zigbee2mqtt.io/) and [ring-mqtt](https://github.com/tsightler/ring-mqtt)).
 
@@ -9,7 +9,7 @@ These are all also available as Home Assistant addons. This chart was created to
 Basic usage:
 
 ```bash
-helm upgrade --install homeassistant-mqtt homeassistant-mqtt/homeassistant-mqtt --values my_values.yaml
+helm upgrade --install hat-mqtt ha-mqtt/ha-mqtt --values my_values.yaml
 ```
 
 ## Configuration
