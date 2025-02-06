@@ -21,6 +21,7 @@ homeassistant:
   persistence:
     size: 8Gi
     accessMode: ReadWriteOnce
+    labels: {}
 
   hostNetwork: false
 
@@ -71,6 +72,7 @@ mosquitto:
   persistence:
     accessMode: ReadWriteOnce
     size: 256Mi
+    labels: {}
 
   nodeSelector: {}
   podAnnotations: {}
@@ -158,6 +160,7 @@ ringMqtt:
   persistence:
     accessMode: ReadWriteOnce
     size: 256Mi
+    labels: {}
 
   mqtt:
     username: ""
