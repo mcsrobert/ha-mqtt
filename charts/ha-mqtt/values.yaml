@@ -19,9 +19,9 @@ homeassistant:
     tls: []
 
   persistence:
+    storageClass: ""
     size: 8Gi
     accessMode: ReadWriteOnce
-    labels: {}
 
   hostNetwork: false
 
@@ -70,9 +70,9 @@ mosquitto:
     tag: "2.0.20"
 
   persistence:
+    storageClass: ""
     accessMode: ReadWriteOnce
     size: 256Mi
-    labels: {}
 
   nodeSelector: {}
   podAnnotations: {}
@@ -110,9 +110,9 @@ zigbee2mqtt:
     tls: []
 
   persistence:
+    storageClass: ""
     accessMode: ReadWriteOnce
     size: 1Gi
-    labels: {}
 
   mqtt:
     username: ""
@@ -159,9 +159,9 @@ ringMqtt:
     tag: "5.7.3"
 
   persistence:
+    storageClass: ""
     accessMode: ReadWriteOnce
     size: 256Mi
-    labels: {}
 
   mqtt:
     username: ""

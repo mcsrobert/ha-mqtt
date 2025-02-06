@@ -7,10 +7,8 @@ metadata:
   name: zigbee2mqtt-data
   labels:
     {{- include "zigbee2mqtt.labels" $ | nindent 4 }}
-    {{- if .labels }}
-    {{- .labels | toYaml | nindent 4 }}
-    {{- end }}
 spec:
+  storageClassName: {{ .storageClass }}
   accessModes:
     - {{ .accessMode }}
   resources:

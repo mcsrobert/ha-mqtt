@@ -5,10 +5,8 @@ metadata:
   name: mosquitto-data
   labels:
     {{- include "mosquitto.labels" $ | nindent 4 }}
-    {{- if .labels }}
-    {{- .labels | toYaml | nindent 4 }}
-    {{- end }}
 spec:
+  storageClassName: {{ .storageClass }}
   accessModes:
     - {{ .accessMode }}
   resources:
