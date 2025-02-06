@@ -112,6 +112,7 @@ zigbee2mqtt:
   persistence:
     accessMode: ReadWriteOnce
     size: 1Gi
+    labels: {}
 
   mqtt:
     username: ""
