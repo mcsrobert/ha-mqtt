@@ -8,7 +8,9 @@ metadata:
   labels:
     {{- include "ringMqtt.labels" $ | nindent 4 }}
 spec:
+  {{- if .storageClass }}
   storageClassName: {{ .storageClass }}
+  {{- end }}
   accessModes:
     - {{ .accessMode }}
   resources:
