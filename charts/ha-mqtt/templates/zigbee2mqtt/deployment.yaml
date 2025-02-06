@@ -8,6 +8,8 @@ metadata:
     {{- include "zigbee2mqtt.labels" $ | nindent 4 }}
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       {{- include "zigbee2mqtt.selectorLabels" $ | nindent 6 }}
