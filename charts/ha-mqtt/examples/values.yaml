@@ -6,7 +6,7 @@ homeassistant:
     enabled: true
     className: traefik
     annotations:
-      "foo.bar/key": value
+      foo.bar/key: value
     host: ha.example.com
     tls:
       - hosts:
@@ -26,7 +26,7 @@ zigbee2mqtt:
     enabled: true
     className: traefik
     annotations:
-      "foo.bar/key": value
+      foo.bar/key: value
     host: z2m.example.com
     tls:
       - hosts:
@@ -38,11 +38,11 @@ zigbee2mqtt:
     password: z2m-secr3t
     mosquitto_hash: $7$101$mQhgJLIxXVtFpOwU$QfIOPODCW2RhDCoLSxMsKqGKTcUmWUucg3dUp04DGFmjVAQ0Vg2TAAdNtfclQEaYNpbi5pfOD1xd9jYj7U8r9g==
 
-  serial:
-    nodeSelector:
-      kubernetes.io/hostname: node_with_usb
-    path: /dev/serial/by-id/my_controller_123456
+  nodeSelector:
+    kubernetes.io/hostname: node_with_usb
 
+  serial:
+    path: /dev/serial/by-id/my_controller_123456
 
 ringMqtt:
 
