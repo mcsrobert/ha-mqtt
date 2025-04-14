@@ -8,6 +8,8 @@ metadata:
     {{- include "ringMqtt.labels" $ | nindent 4 }}
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       {{- include "ringMqtt.selectorLabels" $ | nindent 6 }}
