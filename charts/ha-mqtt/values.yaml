@@ -156,7 +156,7 @@ ringMqtt:
 
   image:
     repository: tsightler/ring-mqtt
-    tag: "5.7.3"
+    tag: "5.8.0"
 
   persistence:
     storageClass: ""
