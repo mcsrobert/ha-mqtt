@@ -12,14 +12,17 @@
             "automerge": false
         }
     ],
-    "regexManagers": [
+    "customManagers": [
         {
-          "fileMatch": ["^charts/ha-mqtt/Chart\\.yaml$"],
-          "matchStrings": [
-            "appVersion:\\s*\"(?<currentValue>.*?)\""
-          ],
-          "datasourceTemplate": "docker",
-          "depNameTemplate": "homeassistant/home-assistant"
+            "customType": "regex",
+            "fileMatch": [
+                "^charts/ha-mqtt/Chart\\.yaml$"
+            ],
+            "matchStrings": [
+                "appVersion:\\s*\"(?<currentValue>.*?)\""
+            ],
+            "datasourceTemplate": "docker",
+            "depNameTemplate": "homeassistant/home-assistant"
         }
     ]
 }
