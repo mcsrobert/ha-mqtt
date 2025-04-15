@@ -1,0 +1,11 @@
+{
+  "extends": ["config:base"],
+  "dependencyDashboard": true,
+  "prCreation": "immediate",
+  "packageRules": [
+      {
+      "matchDatasources": ["helm-values"],
+      "automerge": false
+      }
+  ]
+}
