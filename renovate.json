@@ -1,25 +1,21 @@
 {
-    "extends": [
-        "config:recommended"
-    ],
-    "dependencyDashboard": true,
+    "extends": ["config:recommended"],
+    "baseBranches": ["dev"],
+    "dependencyDashboard": false,
     "prCreation": "immediate",
     "packageRules": [
         {
-            "matchDatasources": [
-                "helm-values"
-            ],
-            "automerge": false
+            "matchDatasources": ["helm-values", "regex"],
+            "automerge": true
         }
     ],
-    "regexManagers": [
-        {
-          "fileMatch": ["^charts/ha-mqtt/Chart\\.yaml$"],
-          "matchStrings": [
-            "appVersion:\\s*\"(?<currentValue>.*?)\""
-          ],
-          "datasourceTemplate": "docker",
-          "depNameTemplate": "homeassistant/home-assistant"
-        }
+    "customManagers": [
+      {
+        "customType": "regex",
+        "fileMatch": ["^charts/ha-mqtt/Chart\\.yaml$"],
+        "matchStrings": ["appVersion:\\s*\"(?<currentValue>.*?)\""],
+        "depNameTemplate": "homeassistant/home-assistant",
+        "datasourceTemplate": "docker"
+      }
     ]
 }
