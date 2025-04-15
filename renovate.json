@@ -7,10 +7,19 @@
     "packageRules": [
         {
             "matchDatasources": [
-                "helmv3",
                 "helm-values"
             ],
             "automerge": false
+        }
+    ],
+    "regexManagers": [
+        {
+          "fileMatch": ["^charts/ha-mqtt/Chart\\.yaml$"],
+          "matchStrings": [
+            "appVersion:\\s*\"(?<currentValue>.*?)\""
+          ],
+          "datasourceTemplate": "docker",
+          "depNameTemplate": "homeassistant/home-assistant"
         }
     ]
 }
