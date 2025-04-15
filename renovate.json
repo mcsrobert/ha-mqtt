@@ -3,6 +3,7 @@
     "baseBranches": ["dev"],
     "dependencyDashboard": false,
     "prCreation": "immediate",
+    "ignorePaths": ["**/examples/**"],
     "packageRules": [
         {
             "matchDatasources": ["helm-values", "regex"],
